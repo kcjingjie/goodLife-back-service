@@ -1,9 +1,7 @@
 package com.kc.goodlife.filter;
 
 import com.kc.goodlife.bean.context.UserBean;
-import com.kc.goodlife.model.UserManagerModel;
 import com.kc.goodlife.service.login.AuthService;
-import com.kc.goodlife.service.system.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -32,8 +30,6 @@ public class AuthFilter implements Filter {
     @Autowired
     private AuthService authService;
 
-    @Autowired
-    private UserManagerService userManagerService;
 
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<String>(
             Arrays.asList("/auth/login", "/auth/logout", "/register","/swagger-ui.html")));
@@ -43,7 +39,7 @@ public class AuthFilter implements Filter {
 
 
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("chushihua");
+
     }
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -85,25 +81,19 @@ public class AuthFilter implements Filter {
         else {
             token = request.getHeader("X-Auth-Token");
         }
-        System.out.println(path);
-        System.out.println(token);
         if (token == null || token.equals("") || !authService.isTokenExist(token)) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         Long userId = authService.getUserIdByToken(token);
-        UserManagerModel userManagerModel = userManagerService.getUserDetails(userId);
+       /* UserManagerModel userManagerModel = userManagerService.getUserDetails(userId);
 
         UserBean userBean = new UserBean();
 
         userBean.setUserName(userManagerModel.getUserName());
-        //userBean.setToken(token);
-        // 数据库中没有相关字段
-        //userBean.setUserRole("user");
-
-
         request.setAttribute("user", userBean);
+        */
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

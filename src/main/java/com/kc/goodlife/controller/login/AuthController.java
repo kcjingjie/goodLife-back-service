@@ -35,12 +35,15 @@ public class AuthController {
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     @ResponseBody
     Result logout(String token) {
-
-
         if (authService.logout(token)) {
             return ResultGenerator.generate(ResultCode.SUCCESS);
         }
 
         return ResultGenerator.generate(ResultCode.FAIL);
     }
+  /*  @RequestMapping(path = "/user/info",method = RequestMethod.GET)
+    @ResponseBody
+    Result getUserInfo(){
+        return ResultGenerator.generate(ResultCode.SUCCESS,"userinfo");
+    }*/
 }

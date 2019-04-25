@@ -19,5 +19,4 @@ public class UserManagerModel {
     private String password;
 
 
-
 }

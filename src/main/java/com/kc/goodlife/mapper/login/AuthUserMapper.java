@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface AuthUserMapper {
 
-    @Select("SELECT username,password FROM manager WHERE username = #{username}")
+    @Select("SELECT id,username,password FROM manager WHERE username = #{username}")
     UserManagerModel getUserByUsername(@Param("username") String username);
 
     @Select(" SELECT password FROM sys_user" +
