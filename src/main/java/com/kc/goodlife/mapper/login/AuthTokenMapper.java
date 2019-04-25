@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface AuthTokenMapper {
-    @Select(" SELECT user_id FROM sys_token WHERE token = #{token}")
+    @Select(" SELECT userId FROM token WHERE token = #{token}")
     Long getUserIdByToken(@Param("token") String token);
 
-    @Select(" SELECT COUNT(user_id) FROM sys_token WHERE token = #{token}")
+    @Select(" SELECT COUNT(userId) FROM TOKEN WHERE token = #{token}")
     Integer isTokenExists(@Param("token") String token);
 
     /**
@@ -18,10 +18,11 @@ public interface AuthTokenMapper {
      * @param userId
      * @return
      */
-    @Select(" SELECT COUNT(user_id) FROM sys_token WHERE user_id = #{userId}")
+    @Select(" SELECT COUNT(userId) FROM token WHERE userID = #{userId}")
     Integer isTokenExistsById(@Param("userId") Long userId);
 
-    @Insert(" INSERT INTO sys_token (user_id, token) VALUES (#{userId}, #{token})")
+    @Insert(" INSERT INTO token (userId, token) VALUES (#{userId}, #{token})")
+    @Options(useGeneratedKeys = true, keyColumn = "id",keyProperty = "id")
     int insertNewToken(@Param("userId") Long userId, @Param("token") String token);
 
     /**
