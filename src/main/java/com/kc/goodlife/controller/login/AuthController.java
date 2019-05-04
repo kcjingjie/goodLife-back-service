@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     @ApiOperation(value = "退出")
-    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    @RequestMapping(path = "/logout", method = RequestMethod.POST)
     @ResponseBody
     Result logout(String token) {
         if (authService.logout(token)) {

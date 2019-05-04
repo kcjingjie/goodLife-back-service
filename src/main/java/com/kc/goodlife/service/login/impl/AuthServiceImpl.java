@@ -32,9 +32,13 @@ public class AuthServiceImpl implements AuthService {
 
         UserManagerModel user = authUserMapper.getUserByUsername(userName);
 
+        if (user == null){
+            throw new ServiceException(ResultCode.USER_OR_PASS_ERROR, new Throwable(ResultCode.USER_OR_PASS_ERROR.getMsg()));
+        }
         // login successfully
         //BCryptUtil.checkpw(rawPassword, user.getPassword())
         if (rawPassword.equals(user.getPassword())) {
+
             System.out.println("密码验证正确");
             // 重新登录 或者 首次登录 都会生成新的 token
             String token = EncryptUtil.encodeMD5(user.getId() + Calendar.getInstance().getTime().toString());

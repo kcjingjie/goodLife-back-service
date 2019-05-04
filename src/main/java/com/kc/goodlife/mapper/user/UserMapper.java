@@ -1,14 +1,13 @@
-package com.kc.goodlife.mapper.userInfo;
-
+package com.kc.goodlife.mapper.user;
 import com.github.pagehelper.Page;
-import org.apache.catalina.User;
+import com.kc.goodlife.model.UserModel;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface UserInfoMapper {
+public interface UserMapper {
 
     @Select("SELECT * FROM user")
-    Page<User> getUserList();
+    Page<UserModel> getUserList();
 
 }
