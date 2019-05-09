@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.kc.goodlife.model.VideoModel;
 
+import java.util.Map;
+
 /**
  * 视频接口
  */
@@ -36,4 +38,8 @@ public interface VideoService {
      */
     Page<VideoModel> getVideosByUserId(Integer userId);
 
+    /**
+     * 视频量 变化
+     */
+    Map getVideoChangeRatio();
 }

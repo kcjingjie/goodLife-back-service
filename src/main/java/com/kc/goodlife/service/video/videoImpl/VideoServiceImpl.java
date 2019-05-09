@@ -1,11 +1,12 @@
 package com.kc.goodlife.service.video.videoImpl;
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import com.kc.goodlife.mapper.video.VideoMapper;
 import com.kc.goodlife.model.VideoModel;
 import com.kc.goodlife.service.video.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -37,5 +38,15 @@ public class VideoServiceImpl implements VideoService {
 
     public Page<VideoModel> getVideosByUserId(Integer userId) {
         return videoMapper.getVideosByUserId(userId);
+    }
+
+    public Map getVideoChangeRatio() {
+        int videoUpdateCount = videoMapper.getVideoUpdateCount();
+        int sevenDaysVideos = videoMapper.getSevenDaysVideos();
+        int yesterdayVideoCount = videoMapper.getYesterdayVideoCount();
+        int lastSevenDaysVideos = videoMapper.getLastSevenDaysVideos();
+
+
+        return null;
     }
 }

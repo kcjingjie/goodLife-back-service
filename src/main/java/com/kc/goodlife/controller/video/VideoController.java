@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/video")
 public class VideoController {
 
     @Autowired
@@ -50,7 +50,8 @@ public class VideoController {
     @RequestMapping("/chartData")
     @ResponseBody
     public Result getChartData(){
-        String count ="{videoCount:"+videoService.getVideosCount()+",totalDays:"+videoService.getTotalDays()+",sevenDays:"+videoService.getSevenDaysVideos()+"}";
+        int average = videoService.getVideosCount()/videoService.getTotalDays();
+        String count ="{videoCount:"+videoService.getVideosCount()+",totalDays:"+videoService.getTotalDays()+",sevenDays:"+videoService.getSevenDaysVideos()+",average:"+average+"}";
         Object parse = JSON.parse(count);
         return  ResultGenerator.generate(ResultCode.SUCCESS,parse);
     }

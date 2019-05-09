@@ -2,7 +2,9 @@ package com.kc.goodlife.controller.user;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.kc.goodlife.model.UserModel;
+import com.kc.goodlife.model.VideoModel;
 import com.kc.goodlife.result.Result;
 import com.kc.goodlife.result.ResultCode;
 import com.kc.goodlife.result.ResultGenerator;
@@ -30,7 +32,8 @@ public class UserController {
     public Result getUserList(Integer pageNum,Integer pageSize){
         PageHelper.startPage(pageNum,pageSize);
         Page<UserModel> userByPage = userService.getUserByPage();
-        return ResultGenerator.generate(ResultCode.SUCCESS,userByPage);
+        PageInfo<UserModel> userPageInfo = new PageInfo<UserModel>(userByPage);
+        return ResultGenerator.generate(ResultCode.SUCCESS,userPageInfo);
     }
 
 }

@@ -85,7 +85,6 @@ public class AuthServiceImpl implements AuthService {
         if (authTokenMapper.isTokenExists(token).equals(0)) {
             return false;
         }
-
         authTokenMapper.delete(token);
         return true;
     }

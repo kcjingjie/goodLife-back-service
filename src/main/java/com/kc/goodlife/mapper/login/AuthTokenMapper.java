@@ -37,6 +37,6 @@ public interface AuthTokenMapper {
 
 
 
-    @Delete(" DELETE FROM sys_token WHERE token = #{token}")
+    @Delete(" DELETE FROM token WHERE token = #{token}")
     int delete(@Param("token") String token);
 }

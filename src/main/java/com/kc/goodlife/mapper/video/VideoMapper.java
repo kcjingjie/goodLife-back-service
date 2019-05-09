@@ -9,9 +9,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface VideoMapper {
-
+    /**
+     * 当天视频数
+     * @return
+     */
     @Select("SELECT count(*) From videos where DATE_FORMAT(time,'%Y-%m-%d')=DATE_FORMAT(curdate(),'%Y-%m-%d') ")
     int getVideoUpdateCount();
+
+    /**
+     * 昨天视频数
+     */
+    @Select("SELECT count(*) From videos where DATE_FORMAT(time,'%Y-%m-%d') = DATE_SUB(curdate(),INTERVAL 1 day)")
+    int getYesterdayVideoCount();
 
     /**
      * 总数据量
@@ -29,6 +38,11 @@ public interface VideoMapper {
      */
     @Select("SELECT count(*) FROM VIDEOS where DATE_SUB(CURDATE(),INTERVAL 6 DAY) <= DATE_FORMAT(time,'%Y-%m-%d')")
     int getSevenDaysVideos();
+    /**
+     * 上一周视频数
+     */
+    @Select("SELECT count(*) FROM VIDEOS where DATE_SUB(CURDATE(),INTERVAL 7 DAY) <= DATE_FORMAT(time,'%Y-%m-%d') and DATE_SUB(CURDATE(),INTERVAL 13 DAY) <= DATE_FORMAT(time,'%Y-%m-%d')")
+    int getLastSevenDaysVideos();
     /**
      * 最近一个月
      */
