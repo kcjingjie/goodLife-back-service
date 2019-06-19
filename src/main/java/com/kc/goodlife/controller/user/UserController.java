@@ -35,5 +35,43 @@ public class UserController {
         PageInfo<UserModel> userPageInfo = new PageInfo<UserModel>(userByPage);
         return ResultGenerator.generate(ResultCode.SUCCESS,userPageInfo);
     }
+    /**
+     * 根据 参数 查询
+     */
+    @RequestMapping("/userSearch")
+    @ResponseBody
+    public Result getUsersSearch(Integer pageNum,Integer pageSize,String param,int state){
+        if (param=="" || param==null){
+            PageHelper.startPage(pageNum,pageSize);
+            Page<UserModel> usersByState = userService.getUsersByState(state);
+            PageInfo<UserModel> userModelPageInfo = new PageInfo<UserModel>(usersByState);
+            return  ResultGenerator.generate(ResultCode.SUCCESS,userModelPageInfo);
+        }
+        PageHelper.startPage(1,1);
+        Page<UserModel> userByIdOrName = userService.getUserByIdOrName(param);
+        PageInfo<UserModel> userModelPageInfo = new PageInfo<UserModel>(userByIdOrName);
+        return  ResultGenerator.generate(ResultCode.SUCCESS,userModelPageInfo);
+    }
+    /**
+     * 通过userId得到用户信息
+     */
+    @RequestMapping("/getUserById")
+    @ResponseBody
+    public Result getUserById(int id){
+        UserModel user = userService.getUserById(id);
+        return  ResultGenerator.generate(ResultCode.SUCCESS,user);
+    }
+    /**
+     * 更新用户 状态
+     */
+    @RequestMapping("/updateUserState")
+    @ResponseBody
+    public Result updateUserState(int userId,int state){
+
+        userService.updateUserState(userId,state);
+
+        return  ResultGenerator.generate(ResultCode.SUCCESS);
+    }
+
 
 }

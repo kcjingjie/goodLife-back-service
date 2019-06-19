@@ -1,6 +1,5 @@
 package com.kc.goodlife.filter;
 
-import com.kc.goodlife.bean.context.UserBean;
 import com.kc.goodlife.service.login.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,12 +56,6 @@ public class AuthFilter implements Filter {
 
         //test
         if (env.equals("dev")) {
-            UserBean userBean = new UserBean();
-
-            userBean.setUserId(1);
-            userBean.setUserName("test");
-
-            request.setAttribute("user", userBean);
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -87,13 +80,7 @@ public class AuthFilter implements Filter {
         }
 
         Long userId = authService.getUserIdByToken(token);
-       /* UserManagerModel userManagerModel = userManagerService.getUserDetails(userId);
 
-        UserBean userBean = new UserBean();
-
-        userBean.setUserName(userManagerModel.getUserName());
-        request.setAttribute("user", userBean);
-        */
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

@@ -44,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
             String token = EncryptUtil.encodeMD5(user.getId() + Calendar.getInstance().getTime().toString());
 
             // user already logged in
-            if (!authTokenMapper.isTokenExistsById(user.getId()).equals(0)) {
+            if (!authTokenMapper.isTokenExistsById(user.getId().longValue()).equals(0)) {
                 authTokenMapper.updateToken(user.getId(), token);
             } else {
                 // 用户首次登陆

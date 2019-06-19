@@ -21,5 +21,6 @@ public class UserModel {
 
     private String imgUrl;
 
+    private String createTime;
 
 }

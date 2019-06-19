@@ -5,8 +5,8 @@ import lombok.Data;
 /**
  * @name
  * @description
- * @author: ZhangWenWei
- * @create: 2018/5/9 上午11:26
+ * @author: liuyan
+ * @create: 2019/4/1 上午11:26
  **/
 @Data
 public class PlatformDataResult implements Result {

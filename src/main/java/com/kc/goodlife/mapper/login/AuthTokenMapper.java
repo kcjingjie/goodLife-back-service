@@ -22,7 +22,6 @@ public interface AuthTokenMapper {
     Integer isTokenExistsById(@Param("userId") Long userId);
 
     @Insert(" INSERT INTO token (userId, token) VALUES (#{userId}, #{token})")
-    @Options(useGeneratedKeys = true, keyColumn = "id",keyProperty = "id")
     int insertNewToken(@Param("userId") Long userId, @Param("token") String token);
 
     /**
